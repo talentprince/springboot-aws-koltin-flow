@@ -1,0 +1,24 @@
+version: '3'
+services:
+  localstack:
+    image: localstack/localstack:0.12.7
+    environment:
+      - SERVICES=dynamodb,sqs
+      - AWS_DEFAULT_REGION=us-east-1
+      - USE_SSL=false
+      - AWS_ACCESS_KEY_ID=foobar
+      - AWS_SECRET_ACCESS_KEY=foobar
+    ports:
+      - 4566:4566
+    volumes:
+      - "./aws:/docker-entrypoint-initaws.d"
+  httpserver:
+    image: node:slim
+    ports:
+      - 3000:3000
+    volumes:
+      - "./httpserver:/app"
+    working_dir: /app
+    command:
+      - sh
+      - start.sh
