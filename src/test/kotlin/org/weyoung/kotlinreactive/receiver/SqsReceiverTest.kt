@@ -1,6 +1,7 @@
 package org.weyoung.kotlinreactive.receiver
 
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -53,7 +54,7 @@ internal class SqsReceiverTest {
 
     @Test
     internal fun `test sqs receiver`() = runBlocking {
-        sqsReceiver.receive<QueueMessage>(queueUrl).collect {
+        sqsReceiver.receive<QueueMessage>(queueUrl).retry().collect {
             println(it)
         }
     }
