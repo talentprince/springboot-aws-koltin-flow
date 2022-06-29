@@ -11,7 +11,7 @@ class SqsMessageCollector(
     private val sqsClient: SqsClient,
     private val queueUrl: String
 ) {
-    fun emit(value: Message) {
+    fun commit(value: Message) {
         DeleteMessageRequest.builder()
             .queueUrl(queueUrl)
             .receiptHandle(value.receiptHandle())
@@ -26,6 +26,6 @@ class SqsMessageCollector(
 fun Flow<Message>.collect(collector: SqsMessageCollector) =
     mono {
         collect {
-            collector.emit(it)
+            collector.commit(it)
         }
     }.subscribe()

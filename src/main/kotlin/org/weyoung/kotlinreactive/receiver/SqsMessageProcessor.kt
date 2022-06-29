@@ -9,10 +9,10 @@ import software.amazon.awssdk.services.sqs.model.Message
 
 class SqsMessageProcessor<T>(
     private val objectMapper: ObjectMapper,
-    private val handler: SqsMessageHandler<T>,
+    private val receiver: MessageReceiver<T>,
     private val clazz: Class<T>
 ) {
-    fun process(message: Message) = objectMapper.readValue(message.body(), clazz).run(handler::handle)
+    fun process(message: Message) = objectMapper.readValue(message.body(), clazz).run(receiver::onReceive)
 
 }
 

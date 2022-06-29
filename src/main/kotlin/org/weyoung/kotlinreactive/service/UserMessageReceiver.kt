@@ -1,11 +1,11 @@
 package org.weyoung.kotlinreactive.service
 
 import org.springframework.stereotype.Service
-import org.weyoung.kotlinreactive.receiver.SqsMessageHandler
+import org.weyoung.kotlinreactive.receiver.MessageReceiver
 
 @Service
-class MessageService : SqsMessageHandler<UserMessage> {
-    override fun handle(message: UserMessage) {
+class UserMessageReceiver : MessageReceiver<UserMessage> {
+    override fun onReceive(message: UserMessage) {
         println(message)
     }
 }

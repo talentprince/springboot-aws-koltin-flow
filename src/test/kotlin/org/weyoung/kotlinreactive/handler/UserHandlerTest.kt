@@ -1,4 +1,4 @@
-package org.weyoung.kotlinreactive
+package org.weyoung.kotlinreactive.handler
 
 import kotlinx.coroutines.flow.flowOf
 import org.junit.jupiter.api.Test
@@ -14,7 +14,6 @@ import org.springframework.test.web.reactive.server.expectBody
 import org.weyoung.kotlinreactive.service.MyService
 import org.weyoung.kotlinreactive.service.User
 import java.time.OffsetDateTime
-
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 class UserHandlerTest {

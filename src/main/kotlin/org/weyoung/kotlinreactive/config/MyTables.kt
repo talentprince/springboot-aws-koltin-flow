@@ -1,5 +1,6 @@
-package org.weyoung.kotlinreactive.repository.database
+package org.weyoung.kotlinreactive.config
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.weyoung.kotlinreactive.repository.database.entity.UserEntity
@@ -9,11 +10,10 @@ import software.amazon.awssdk.enhanced.dynamodb.TableSchema
 
 @Configuration
 class MyTables {
-    companion object {
-        const val TABLE_NAME = "test-table"
-    }
-
     @Bean
-    fun userTable(dynamoDbEnhancedClient: DynamoDbEnhancedClient): DynamoDbTable<UserEntity> = dynamoDbEnhancedClient
-        .table(TABLE_NAME, TableSchema.fromBean(UserEntity::class.java))
+    fun userTable(
+        @Value("\${dynamo.table.name}")
+        tableName: String,
+        dynamoDbEnhancedClient: DynamoDbEnhancedClient): DynamoDbTable<UserEntity> = dynamoDbEnhancedClient
+        .table(tableName, TableSchema.fromBean(UserEntity::class.java))
 }

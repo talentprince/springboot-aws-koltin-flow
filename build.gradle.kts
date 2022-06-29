@@ -4,17 +4,17 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.5.3"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.5.21"
-    kotlin("plugin.spring") version "1.5.21"
-    id("org.jetbrains.kotlin.plugin.noarg") version "1.5.21"
+    kotlin("jvm") version "1.7.0"
+    kotlin("plugin.spring") version "1.7.0"
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.7.0"
 }
 
 group = "org.weyoung"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
-val coroutinesVersion = "1.5.1"
-val awsSdkVersion = "2.17.9"
+val coroutinesVersion = "1.6.2"
+val awsSdkVersion = "2.17.220"
 
 noArg {
     annotation("software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean")
@@ -51,8 +51,8 @@ tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf(
             "-Xjsr305=strict",
-            "-Xuse-experimental=kotlinx.coroutines.FlowPreview",
-            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            "-opt-in=kotlinx.coroutines.FlowPreview",
+            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
         )
         jvmTarget = "11"
     }
