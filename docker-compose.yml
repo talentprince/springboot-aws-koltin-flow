@@ -1,7 +1,7 @@
 version: '3'
 services:
   localstack:
-    image: localstack/localstack:0.12.7
+    image: localstack/localstack:0.14.4
     environment:
       - SERVICES=dynamodb,sqs
       - AWS_DEFAULT_REGION=us-east-1

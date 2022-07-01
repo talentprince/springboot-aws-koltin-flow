@@ -1,5 +1,7 @@
 package org.weyoung.kotlinreactive.receiver
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.any
@@ -29,7 +31,7 @@ internal class SqsReceiverTest {
 
     @BeforeEach
     internal fun setUp() {
-        SqsClient.builder().region(Region.AP_EAST_1).endpointOverride(URI.create(endpoint)).build().run {
+        SqsClient.builder().region(Region.US_EAST_1).endpointOverride(URI.create(endpoint)).build().run {
             purgeQueue(PurgeQueueRequest.builder().queueUrl(queueUrl).build())
             sendMessageBatch(
                 SendMessageBatchRequest.builder()
@@ -56,7 +58,7 @@ internal class SqsReceiverTest {
     }
 
     @Test
-    internal fun `test sqs receiver`() {
+    internal fun `test sqs receiver`() = runBlocking{
         verify(receiver, timeout(3000).times(5)).onReceive(any())
     }
 }

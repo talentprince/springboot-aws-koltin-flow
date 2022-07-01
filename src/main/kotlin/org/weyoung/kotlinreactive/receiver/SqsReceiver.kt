@@ -16,8 +16,8 @@ class SqsReceiver(
     fun receive(queueUrl: String): Flow<Message> = channelFlow {
         val request = ReceiveMessageRequest.builder()
             .maxNumberOfMessages(5)
-            .waitTimeSeconds(10)
-            .visibilityTimeout(30)
+            .waitTimeSeconds(3)
+            .visibilityTimeout(5)
             .queueUrl(queueUrl)
             .build()
         repeat(parallelPollingCount) {

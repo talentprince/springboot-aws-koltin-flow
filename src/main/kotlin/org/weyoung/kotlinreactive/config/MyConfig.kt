@@ -16,7 +16,7 @@ import java.net.URI
 class MyConfig(@Value("\${application.aws.endpoint}") private val endpoint: String) {
     @Bean
     fun dynamoDbClient(): DynamoDbClient = DynamoDbClient.builder()
-        .region(Region.AP_EAST_1)
+        .region(Region.US_EAST_1)
         .endpointOverride(URI.create(endpoint))
         .build()
 
@@ -34,7 +34,7 @@ class MyConfig(@Value("\${application.aws.endpoint}") private val endpoint: Stri
 
     @Bean
     fun sqsClient(): SqsClient = SqsClient.builder()
-        .region(Region.AP_EAST_1)
+        .region(Region.US_EAST_1)
         .endpointOverride(URI.create(endpoint))
         .build()
 }

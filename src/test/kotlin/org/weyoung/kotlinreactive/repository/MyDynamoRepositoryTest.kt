@@ -29,7 +29,7 @@ internal class MyDynamoRepositoryTest {
         DynamoDbEnhancedClient.builder()
             .dynamoDbClient(
                 DynamoDbClient.builder()
-                    .region(Region.AP_EAST_1)
+                    .region(Region.US_EAST_1)
                     .endpointOverride(URI.create(endpoint))
                     .build()
             ).build().table("test-table", TableSchema.fromBean(UserEntity::class.java))
